@@ -1014,10 +1014,8 @@
             const date = document.getElementById('date').value;
             const time = document.getElementById('time').value;
             const service = document.getElementById('service-select').value;
-            const msgEl = document.getElementById('message');
-            const message = msgEl ? msgEl.value : '';
             
-            const whatsappMsg = `New Appointment Request from Dental Care Website%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0APreferred Date: ${date} at ${time}%0AService: ${service}%0AMessage: ${message}%0A%0APlease confirm the appointment.`;
+            const whatsappMsg = `New Appointment Request%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0APreferred Date: ${date} at ${time}%0AService: ${service}%0A%0APlease confirm the appointment.`;
             
             document.getElementById('success-modal').classList.add('active');
             fireConfetti();
