@@ -1027,6 +1027,11 @@
             const time = document.getElementById('time').value;
             const service = document.getElementById('service-select').value;
 
+            // Format Date (YYYY-MM-DD to DD Month YYYY)
+            const dateObj = new Date(date);
+            const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const formattedDate = `${dateObj.getDate()} ${months[dateObj.getMonth()]} ${dateObj.getFullYear()}`;
+
             // Convert time to AM/PM
             const [h24, m] = time.split(':');
             let h = parseInt(h24);
@@ -1034,7 +1039,7 @@
             h = h % 12 || 12;
             const formattedTime = `${h}:${m} ${ampm}`;
             
-            const msgText = `🦷 *New Appointment Request - Dental Care Clinic*\n\n👤 *Name:* ${name}\n✉️ *Email:* ${email}\n🦷 *Service:* ${service}\n📅 *Date:* ${date}\n⏰ *Time:* ${formattedTime}\n📱 *Phone:* ${phone}\n\n_Please confirm my appointment. Thank you!_`;
+            const msgText = `🦷 *New Appointment Request - Dental Care Clinic*\n\n👤 *Name:* ${name}\n✉️ *Email:* ${email}\n🦷 *Service:* ${service}\n📅 *Date:* ${formattedDate}\n⏰ *Time:* ${formattedTime}\n📱 *Phone:* ${phone}\n\n_Please confirm my appointment. Thank you!_`;
             const whatsappMsg = encodeURIComponent(msgText);
             
             document.getElementById('success-modal').classList.add('active');
