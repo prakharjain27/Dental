@@ -295,31 +295,31 @@
 <body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden">
 
 <!-- 1. NAVBAR -->
-<header id="navbar" class="fixed top-0 w-full z-50 bg-white/80 md:bg-white/40 dark:bg-inverse-surface/80 md:dark:bg-inverse-surface/40 backdrop-blur-2xl h-20 transition-all duration-500 shadow-none border-b border-transparent">
+<header id="navbar" class="fixed top-0 w-full z-50 bg-white/90 md:bg-white/60 dark:bg-inverse-surface/90 md:dark:bg-inverse-surface/60 backdrop-blur-2xl h-22 transition-all duration-500 shadow-lg border-b border-white/10">
 <nav class="max-w-container-max mx-auto px-6 md:px-gutter flex justify-between items-center h-full relative z-20">
-<div class="flex items-center gap-2 group cursor-pointer">
-<span class="material-symbols-outlined text-primary text-3xl transition-transform duration-500 group-hover:rotate-[360deg]" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-display text-headline-sm font-black text-on-background">Dental<span class="text-primary">Care</span></span>
+<div class="flex items-center gap-3 group cursor-pointer">
+<span class="material-symbols-outlined text-primary text-4xl transition-transform duration-500 group-hover:rotate-[360deg]" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-display text-3xl font-black text-on-background tracking-tight">Dental<span class="text-primary">Care</span></span>
 </div>
 
 <!-- Desktop Menu -->
-<div class="hidden md:flex items-center gap-stack-lg">
-<a class="font-body-md text-body-md font-bold text-primary pb-1 hover-glow nav-link nav-active" onclick="scrollToSection('home')" data-target="home">Home</a>
-<a class="font-body-md text-body-md font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('about')" data-target="about">About</a>
-<a class="font-body-md text-body-md font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('services')" data-target="services">Services</a>
-<a class="font-body-md text-body-md font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('team')" data-target="team">Team</a>
-<a class="font-body-md text-body-md font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('contacts')" data-target="contacts">Contact</a>
+<div class="hidden md:flex items-center gap-10">
+<a class="font-body-md text-body-lg font-bold text-primary pb-1 hover-glow nav-link nav-active" onclick="scrollToSection('home')" data-target="home">Home</a>
+<a class="font-body-md text-body-lg font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('about')" data-target="about">About</a>
+<a class="font-body-md text-body-lg font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('services')" data-target="services">Services</a>
+<a class="font-body-md text-body-lg font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('team')" data-target="team">Team</a>
+<a class="font-body-md text-body-lg font-bold text-on-surface-variant hover:text-primary hover-glow nav-link" onclick="scrollToSection('contacts')" data-target="contacts">Contact</a>
 </div>
 
-<div class="flex items-center gap-4">
-    <button onclick="scrollToSection('appointment')" class="ripple-btn hidden md:flex bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-full font-bold items-center gap-2 hover:bg-primary hover:text-white transition-all hover:scale-[1.08] hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] hover:shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] active:scale-95 duration-500 group">
+<div class="flex items-center gap-6">
+    <button onclick="scrollToSection('appointment')" class="ripple-btn hidden md:flex bg-primary text-white px-8 py-3.5 rounded-full font-bold items-center gap-2 hover:scale-[1.08] hover:shadow-[0_15px_30px_rgba(37,99,235,0.4)] active:scale-95 transition-all duration-500 group">
                     Let's Talk
                     <span class="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
     </button>
     
     <!-- Mobile Menu Button -->
-    <button id="mobile-menu-btn" class="md:hidden text-on-background p-2 rounded-full hover:bg-surface-container-low transition-colors">
-        <span class="material-symbols-outlined text-3xl">menu</span>
+    <button id="mobile-menu-btn" class="md:hidden text-on-background p-2.5 rounded-full hover:bg-surface-container-low transition-colors border border-outline-variant/20">
+        <span class="material-symbols-outlined text-3xl font-bold">menu</span>
     </button>
 </div>
 </nav>
@@ -737,52 +737,59 @@
 </main>
 
 <!-- 11. FOOTER -->
-<footer id="contacts" class="bg-inverse-surface text-white w-full">
-<div class="max-w-container-max mx-auto px-6 md:px-gutter py-16 md:py-24 flex flex-col gap-12 md:gap-16">
+<footer id="contacts" class="bg-inverse-surface text-white w-full border-t border-white/5">
+<div class="max-w-container-max mx-auto px-6 md:px-gutter pt-16 pb-8 md:pt-20 md:pb-10 flex flex-col gap-10 md:gap-12">
 <div class="grid grid-cols-1 md:grid-cols-3 gap-10 md:gap-12 items-start text-center sm:text-left">
 
 <!-- Left: Logo + Short About + Contact Info -->
 <div class="space-y-6 md:space-y-8 flex flex-col items-center sm:items-start">
-<div class="flex items-center gap-2">
+<div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-primary-fixed-dim text-4xl" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-display text-headline-sm font-black text-white">Dental<span class="text-primary-fixed-dim">Care</span></span>
+<span class="font-display text-3xl font-black text-white tracking-tight">Dental<span class="text-primary-fixed-dim">Care</span></span>
 </div>
-<p class="text-outline-variant text-base md:text-body-lg leading-relaxed">Providing precision dental care with empathy since 1995. Your smile is our signature.</p>
-<div class="space-y-2 mt-4">
+<p class="text-outline-variant text-base md:text-body-lg leading-relaxed max-w-sm">Providing precision dental care with empathy since 1995. Your smile is our signature of quality and care.</p>
+<div class="space-y-3 mt-4">
 <p class="text-outline-variant text-base md:text-body-lg leading-relaxed">
-    <strong>Dental Care Clinic</strong><br/>
+    <strong class="text-white">Dental Care Clinic</strong><br/>
     Near Medical College,<br/>
     Jodhpur, Rajasthan 342001
 </p>
-<a href="tel:+917014969794" class="block text-primary-fixed-dim hover:text-white font-bold transition-colors w-fit link-underline text-base md:text-lg mt-2">+91 70149 69794</a>
-<a href="mailto:hello@dentalcare.in" class="block text-primary-fixed-dim hover:text-white font-bold transition-colors w-fit link-underline text-base md:text-lg">hello@dentalcare.in</a>
+<a href="tel:+917014969794" class="block text-primary-fixed-dim hover:text-white font-bold transition-all w-fit text-lg mt-2 hover:translate-x-2">+91 70149 69794</a>
+<a href="mailto:hello@dentalcare.in" class="block text-primary-fixed-dim hover:text-white font-bold transition-all w-fit text-lg hover:translate-x-2">hello@dentalcare.in</a>
 </div>
 </div>
 
-<!-- Middle: Visit Our Clinic (with Google Map) -->
-<div class="space-y-4 md:space-y-6 flex flex-col items-center sm:items-start w-full">
+<!-- Middle: Visit Our Clinic -->
+<div class="space-y-6 flex flex-col items-center sm:items-start w-full">
 <h4 class="text-white font-bold text-headline-sm">Visit Our Clinic</h4>
-<div class="w-full h-48 md:h-56 rounded-2xl overflow-hidden border-2 border-white/10 shadow-lg relative bg-surface-container-low">
+<div class="w-full h-48 md:h-52 rounded-[2rem] overflow-hidden border border-white/10 shadow-2xl relative bg-surface-container-low group">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114312.33649557451!2d72.9367362!3d26.2703817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418c4eaa06cb69%3A0x8114ea5b0eea1abc!2sJodhpur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
-<a href="https://maps.google.com/?q=Dental Care+Dental+Clinic,+Near+Medical+College,+Jodhpur,+Rajasthan+342001" target="_blank" class="ripple-btn bg-primary text-white px-6 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white hover:text-primary transition-all duration-300 hover:scale-[1.05] shadow-lg w-full md:w-auto mt-2">
+<a href="https://maps.google.com/?q=Dental Care+Dental+Clinic,+Near+Medical+College,+Jodhpur,+Rajasthan+342001" target="_blank" class="ripple-btn bg-white/10 text-white px-8 py-3.5 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-primary hover:text-white transition-all duration-500 hover:scale-[1.05] shadow-xl w-full md:w-auto">
     Get Directions <span class="material-symbols-outlined text-sm">open_in_new</span>
 </a>
 </div>
 
-<!-- Right: Social Links -->
+<!-- Right: Follow Us -->
 <div class="space-y-6 md:space-y-8 flex flex-col items-center sm:items-start md:items-end w-full">
 <h4 class="text-white font-bold text-headline-sm md:text-right">Follow Us</h4>
-<div class="flex gap-4">
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-[0_0_15px_rgba(37,99,235,0.6)] active:scale-95 duration-300" href="#"><span class="material-symbols-outlined">social_leaderboard</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-[0_0_15px_rgba(37,99,235,0.6)] active:scale-95 duration-300" href="#"><span class="material-symbols-outlined">group</span></a>
-<a class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-[0_0_15px_rgba(37,99,235,0.6)] active:scale-95 duration-300" href="#"><span class="material-symbols-outlined">camera</span></a>
+<div class="flex gap-6">
+<a class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95 duration-500 group" href="#" aria-label="Facebook">
+    <span class="material-symbols-outlined text-2xl">public</span>
+</a>
+<a class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95 duration-500 group" href="#" aria-label="Instagram">
+    <span class="material-symbols-outlined text-2xl">camera</span>
+</a>
+<a class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center hover:bg-primary hover:text-white transition-all hover:scale-110 hover:shadow-[0_0_30px_rgba(37,99,235,0.4)] active:scale-95 duration-500 group" href="#" aria-label="Twitter">
+    <span class="material-symbols-outlined text-2xl">alternate_email</span>
+</a>
 </div>
+<p class="text-outline-variant text-sm md:text-right max-w-[200px]">Stay connected for the latest dental tips and clinic updates.</p>
 </div>
 
 </div>
-<div class="pt-8 border-t border-white/10 text-center">
-<p class="text-outline-variant text-sm md:text-body-md font-medium">© 2026 Dental Care. All rights reserved.</p>
+<div class="pt-8 border-t border-white/5 text-center">
+<p class="text-outline-variant text-xs md:text-sm font-medium tracking-wide">© 2026 Dental Care Clinic Jodhpur. All rights reserved.</p>
 </div>
 </div>
 </footer>
