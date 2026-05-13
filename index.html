@@ -566,14 +566,14 @@
 <div class="w-full md:w-1/2 p-8 md:p-16 lg:p-20 relative z-10 flex flex-col justify-center">
 <span class="reveal-up font-bold tracking-widest text-label-md uppercase text-primary-fixed-dim mb-4 block"># APPOINTMENT BOOKING</span>
 <h2 class="reveal-up text-headline-lg-mobile md:text-headline-lg mb-8 md:mb-10 text-white" style="transition-delay: 100ms;">Easy &amp; quick appointment</h2>
-<form id="appointment-form" class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6 reveal-scale" style="transition-delay: 200ms;">
+<form id="appointment-form" class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 reveal-scale" style="transition-delay: 200ms;">
 <div class="relative md:col-span-1">
     <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm" id="fname" placeholder="Full name" type="text"/>
-    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#1e293b] px-2 rounded peer-placeholder-shown:text-white/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:bg-transparent peer-focus:top-0 peer-focus:scale-[0.85] peer-focus:-translate-y-1/2 peer-focus:bg-[#1e293b] peer-focus:text-white pointer-events-none" for="fname">Full Name</label>
+    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-placeholder-shown:text-white/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:bg-transparent peer-focus:top-0 peer-focus:scale-[0.85] peer-focus:-translate-y-1/2 peer-focus:bg-[#0f172a] peer-focus:text-white pointer-events-none" for="fname">Full Name</label>
 </div>
 <div class="relative md:col-span-1">
     <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm" id="email" placeholder="Email" type="email"/>
-    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#1e293b] px-2 rounded peer-placeholder-shown:text-white/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:bg-transparent peer-focus:top-0 peer-focus:scale-[0.85] peer-focus:-translate-y-1/2 peer-focus:bg-[#1e293b] peer-focus:text-white pointer-events-none" for="email">Email Address</label>
+    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-placeholder-shown:text-white/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:bg-transparent peer-focus:top-0 peer-focus:scale-[0.85] peer-focus:-translate-y-1/2 peer-focus:bg-[#0f172a] peer-focus:text-white pointer-events-none" for="email">Email Address</label>
 </div>
 <div class="relative md:col-span-2">
     <select id="service-select" required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm [color-scheme:dark]">
@@ -585,19 +585,19 @@
         <option value="Emergency Care" class="text-black">Emergency Care</option>
         <option value="General Consultation" class="text-black">General Consultation</option>
     </select>
-    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white/50 duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#1e293b] px-2 rounded peer-focus:text-white pointer-events-none" for="service-select">Select a Service</label>
+    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-focus:text-white pointer-events-none" for="service-select">Select a Service</label>
 </div>
 <div class="relative md:col-span-1">
     <input id="date" required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm [color-scheme:dark]" type="date"/>
-    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white/50 duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#1e293b] px-2 rounded peer-focus:text-white pointer-events-none" for="date">Date</label>
+    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-focus:text-white pointer-events-none" for="date">Preferred Date</label>
 </div>
 <div class="relative md:col-span-1">
     <input id="time" required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm [color-scheme:dark]" type="time"/>
-    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white/50 duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#1e293b] px-2 rounded peer-focus:text-white pointer-events-none" for="time">Time</label>
+    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-focus:text-white pointer-events-none" for="time">Preferred Time</label>
 </div>
 <div class="relative col-span-1 md:col-span-2">
     <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white placeholder-transparent focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm" id="phone" placeholder="Phone" type="tel"/>
-    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#1e293b] px-2 rounded peer-placeholder-shown:text-white/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:bg-transparent peer-focus:top-0 peer-focus:scale-[0.85] peer-focus:-translate-y-1/2 peer-focus:bg-[#1e293b] peer-focus:text-white pointer-events-none" for="phone">Phone Number</label>
+    <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-placeholder-shown:text-white/50 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-placeholder-shown:bg-transparent peer-focus:top-0 peer-focus:scale-[0.85] peer-focus:-translate-y-1/2 peer-focus:bg-[#0f172a] peer-focus:text-white pointer-events-none" for="phone">Phone Number</label>
 </div>
 <button type="submit" class="ripple-btn col-span-1 md:col-span-2 bg-primary text-white py-4 md:py-5 rounded-full font-bold text-lg hover:shadow-[0_15px_40px_rgba(37,99,235,0.6),inset_0_0_20px_rgba(255,255,255,0.3)] hover:scale-[1.03] md:hover:scale-[1.05] active:scale-95 transition-all duration-500 mt-2 border border-white/10 group">
     Reserve Your Spot <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
