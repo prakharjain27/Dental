@@ -592,7 +592,7 @@
     <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-focus:text-white pointer-events-none" for="date">Preferred Date</label>
 </div>
 <div class="relative md:col-span-1">
-    <input id="time" required min="10:00" max="21:00" class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm [color-scheme:dark]" type="time"/>
+    <input id="time" required min="10:00" max="21:00" oninvalid="this.setCustomValidity('Please select a time between 10:00 AM and 09:00 PM')" oninput="this.setCustomValidity('')" class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-300 floating-input peer shadow-sm [color-scheme:dark]" type="time"/>
     <label class="absolute left-5 top-0 z-10 origin-[0] text-sm text-white duration-300 transform -translate-y-1/2 scale-[0.85] bg-[#0f172a] px-2 rounded peer-focus:text-white pointer-events-none" for="time">Preferred Time (10AM - 9PM)</label>
 </div>
 <div class="relative col-span-1 md:col-span-2">
