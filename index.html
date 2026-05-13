@@ -210,6 +210,82 @@
         transform: translateY(0) !important;
         pointer-events: auto !important;
     }
+
+    /* Interactive Styles */
+    .nav-active {
+        color: #2563eb !important;
+        border-bottom-color: #2563eb !important;
+    }
+    .nav-link { border-bottom: 2px solid transparent; transition: all 0.3s ease; cursor: pointer; }
+
+    .ripple-btn {
+        position: relative;
+        overflow: hidden;
+        transform: translate3d(0,0,0);
+        cursor: pointer;
+    }
+    .ripple-btn:active {
+        transform: scale(0.95) !important;
+    }
+    .ripple {
+        position: absolute;
+        border-radius: 50%;
+        transform: scale(0);
+        animation: ripple-anim 600ms linear;
+        background-color: rgba(255, 255, 255, 0.4);
+        pointer-events: none;
+    }
+    @keyframes ripple-anim {
+        to { transform: scale(4); opacity: 0; }
+    }
+
+    .modal-overlay {
+        position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(8px);
+        z-index: 100; display: flex; align-items: center; justify-content: center;
+        opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-content {
+        background: #fff; border-radius: 2rem; padding: 2rem; max-width: 500px; width: 90%;
+        transform: translateY(30px) scale(0.95); transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        position: relative;
+        text-align: center;
+    }
+    .modal-overlay.active .modal-content { transform: translateY(0) scale(1); }
+    
+    .testimonial-expanded {
+        position: fixed !important; top: 50% !important; left: 50% !important;
+        transform: translate(-50%, -50%) scale(1.05) !important; z-index: 110;
+        box-shadow: 0 40px 100px rgba(0,0,0,0.4) !important;
+        max-width: 600px; width: 90%; margin: 0 !important;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+    }
+    .testimonial-overlay {
+        position: fixed; inset: 0; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);
+        z-index: 105; opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+    }
+    .testimonial-overlay.active { opacity: 1; pointer-events: auto; cursor: pointer; }
+
+    /* Success Confetti Animation */
+    .success-checkmark {
+        width: 80px; height: 80px; border-radius: 50%;
+        display: block; stroke-width: 2; stroke: #fff; stroke-miterlimit: 10;
+        box-shadow: inset 0px 0px 0px #4ade80; animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+        background-color: #4ade80; margin: 0 auto 20px;
+    }
+    .success-checkmark circle {
+        stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 2; stroke-miterlimit: 10;
+        stroke: #4ade80; fill: none; animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+    }
+    .success-checkmark path {
+        transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48;
+        animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+    }
+    @keyframes stroke { 100% { stroke-dashoffset: 0; } }
+    @keyframes scale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
+    @keyframes fill { 100% { box-shadow: inset 0px 0px 0px 40px #4ade80; } }
+
 </style>
 </head>
 <body class="bg-background text-on-background font-body-md selection:bg-primary selection:text-on-primary overflow-x-hidden">
@@ -224,15 +300,15 @@
 
 <!-- Desktop Menu -->
 <div class="hidden md:flex items-center gap-stack-lg">
-<a class="font-body-md text-body-md font-bold text-primary border-b-2 border-primary pb-1 hover-glow" href="#">Home</a>
-<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" href="#">About</a>
-<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" href="#">Care Services</a>
-<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" href="#">Pricing</a>
-<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" href="#">Contacts</a>
+<a class="font-body-md text-body-md font-bold text-primary border-b-2 border-primary pb-1 hover-glow" onclick="scrollToSection('home')" class="nav-link nav-active" data-target="home">Home</a>
+<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" onclick="scrollToSection('about')" class="nav-link" data-target="about">About</a>
+<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" onclick="scrollToSection('services')" class="nav-link" data-target="services">Care Services</a>
+<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" onclick="scrollToSection('pricing')" class="nav-link" data-target="pricing">Pricing</a>
+<a class="font-body-md text-body-md font-medium text-on-surface-variant hover:text-primary hover-glow" onclick="scrollToSection('contacts')" class="nav-link" data-target="contacts">Contacts</a>
 </div>
 
 <div class="flex items-center gap-4">
-    <button class="hidden md:flex bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-full font-bold items-center gap-2 hover:bg-primary hover:text-white transition-all hover:scale-[1.08] hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] hover:shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] active:scale-95 duration-500 group">
+    <button onclick="scrollToSection('appointment')" class="ripple-btn hidden md:flex bg-primary/10 text-primary border border-primary/20 px-6 py-3 rounded-full font-bold items-center gap-2 hover:bg-primary hover:text-white transition-all hover:scale-[1.08] hover:shadow-[0_0_20px_rgba(37,99,235,0.6)] hover:shadow-[inset_0_0_20px_rgba(255,255,255,0.4)] active:scale-95 duration-500 group">
                     Let's Talk
                     <span class="material-symbols-outlined text-sm group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
     </button>
@@ -246,11 +322,11 @@
 
 <!-- Mobile Menu Overlay -->
 <div id="mobile-menu" class="fixed inset-0 top-20 bg-white dark:bg-inverse-surface z-10 opacity-0 -translate-y-4 pointer-events-none flex flex-col p-6 shadow-xl border-t border-outline-variant/20 md:hidden">
-    <a class="py-4 text-headline-sm font-bold text-primary border-b border-outline-variant/10" href="#">Home</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" href="#">About</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" href="#">Care Services</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" href="#">Pricing</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" href="#">Contacts</a>
+    <a class="py-4 text-headline-sm font-bold text-primary border-b border-outline-variant/10" onclick="scrollToSection('home'); closeMobileMenu()" class="nav-link" data-target="home">Home</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" onclick="scrollToSection('about'); closeMobileMenu()" class="nav-link" data-target="about">About</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" onclick="scrollToSection('services'); closeMobileMenu()" class="nav-link" data-target="services">Care Services</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" onclick="scrollToSection('pricing'); closeMobileMenu()" class="nav-link" data-target="pricing">Pricing</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10" onclick="scrollToSection('contacts'); closeMobileMenu()" class="nav-link" data-target="contacts">Contacts</a>
     <button class="mt-8 bg-primary text-white py-4 rounded-full font-bold text-lg w-full flex justify-center items-center gap-2 hover:shadow-lg active:scale-95 transition-all">
         Let's Talk <span class="material-symbols-outlined text-sm">arrow_forward</span>
     </button>
@@ -259,7 +335,7 @@
 <main>
 
 <!-- 2. HERO -->
-<section class="pt-24 pb-16 md:pt-32 md:pb-section-gap px-6 md:px-gutter bg-gradient-to-br from-[#e0e7ff] via-[#f8fafc] to-[#dbeafe] overflow-hidden relative">
+<section id="home" class="pt-24 pb-16 md:pt-32 md:pb-section-gap px-6 md:px-gutter bg-gradient-to-br from-[#e0e7ff] via-[#f8fafc] to-[#dbeafe] overflow-hidden relative">
 <!-- Floating Particles (Dental Theme) -->
 <span class="material-symbols-outlined particle text-2xl md:text-3xl top-24 left-4 md:left-10" style="animation-duration: 5s;">dentistry</span>
 <span class="material-symbols-outlined particle text-xl md:text-2xl top-16 md:top-20 right-8 md:right-1/4" style="animation-duration: 7s; animation-delay: 1s;">flare</span>
@@ -276,11 +352,11 @@
                     </h1>
 <p class="reveal-up text-body-md md:text-body-lg text-on-surface-variant max-w-lg mx-auto md:mx-0 leading-relaxed" style="transition-delay: 200ms;">Experience world-class dentistry designed around your comfort, utilizing the latest technology for a flawless smile.</p>
 <div class="reveal-up flex flex-col sm:flex-row gap-4 pt-4 justify-center md:justify-start" style="transition-delay: 300ms;">
-<button class="glow-pulse bg-primary text-white px-8 py-4 rounded-full font-bold text-body-lg flex justify-center items-center gap-3 hover:shadow-[0_15px_40px_rgba(37,99,235,0.6),inset_0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.05] md:hover:scale-[1.08] transition-all group active:scale-95 duration-500">
+<button onclick="scrollToSection('appointment')" class="ripple-btn glow-pulse bg-primary text-white px-8 py-4 rounded-full font-bold text-body-lg flex justify-center items-center gap-3 hover:shadow-[0_15px_40px_rgba(37,99,235,0.6),inset_0_0_20px_rgba(255,255,255,0.4)] hover:scale-[1.05] md:hover:scale-[1.08] transition-all group active:scale-95 duration-500">
                         Schedule Visit
                         <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">arrow_right_alt</span>
 </button>
-<button class="bg-white text-on-background px-8 py-4 rounded-full font-bold text-body-lg flex justify-center items-center gap-3 hover:bg-surface-container-low hover:shadow-[0_15px_40px_rgba(15,23,42,0.1),inset_0_0_20px_rgba(0,0,0,0.05)] hover:scale-[1.05] md:hover:scale-[1.08] transition-all group active:scale-95 duration-500 border border-outline-variant/30">
+<button onclick="scrollToSection('services')" class="ripple-btn bg-white text-on-background px-8 py-4 rounded-full font-bold text-body-lg flex justify-center items-center gap-3 hover:bg-surface-container-low hover:shadow-[0_15px_40px_rgba(15,23,42,0.1),inset_0_0_20px_rgba(0,0,0,0.05)] hover:scale-[1.05] md:hover:scale-[1.08] transition-all group active:scale-95 duration-500 border border-outline-variant/30">
                         Our Services
 </button>
 </div>
@@ -315,7 +391,7 @@
 <h3 class="text-headline-sm text-on-background font-bold mb-3 group-hover:text-primary transition-colors duration-300">Caring Dentists</h3>
 <p class="text-body-md text-on-surface-variant mb-6 leading-relaxed">Your health and safety are our top priority at every visit.</p>
 </div>
-<a class="text-primary font-bold flex items-center gap-2 group/link w-fit" href="#">
+<a onclick="scrollToSection('services')" class="text-primary font-bold flex items-center gap-2 group/link w-fit cursor-pointer">
                         Explore More
                         <span class="material-symbols-outlined group-hover/link:translate-x-2 transition-transform duration-300">chevron_right</span>
 </a>
@@ -352,7 +428,7 @@
 </section>
 
 <!-- 4. ABOUT -->
-<section class="py-12 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto grid md:grid-cols-2 gap-12 md:gap-24 items-center">
+<section id="about" class="py-12 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto grid md:grid-cols-2 gap-12 md:gap-24 items-center">
 <div class="order-2 md:order-1 reveal-scale">
 <div class="relative group mx-auto w-fit md:w-full">
 <img alt="About Dental Care" class="rounded-[2.5rem] shadow-[0_20px_50px_rgba(15,23,42,0.1)] relative z-10 image-zoom-slow group-hover:scale-105 group-hover:brightness-110 border-8 border-white w-full max-w-md md:max-w-none" src="./images/about_indian_dentist_1778618074224.png"/>
@@ -363,7 +439,7 @@
 <span class="reveal-up block text-primary font-bold tracking-widest text-label-md uppercase"># ABOUT DENTAL CARE</span>
 <h2 class="reveal-up text-headline-lg-mobile md:text-headline-lg text-on-background" style="transition-delay: 100ms;">Your trusted partners in dental care</h2>
 <p class="reveal-up text-body-md md:text-body-lg text-on-surface-variant leading-relaxed" style="transition-delay: 200ms;">At Dental Care, we combine state-of-the-art technology with a compassionate touch. Our team of specialists is dedicated to providing comprehensive oral health solutions tailored to your unique needs, ensuring every visit is as comfortable as it is effective.</p>
-<button class="reveal-up bg-on-background text-white px-8 py-4 rounded-full font-bold flex items-center justify-center md:justify-start gap-3 transition-all duration-500 hover:scale-[1.05] md:hover:scale-[1.08] hover:shadow-[0_15px_40px_rgba(15,23,42,0.4),inset_0_0_20px_rgba(255,255,255,0.3)] active:scale-95 group mt-4 mx-auto md:mx-0 w-full md:w-auto" style="transition-delay: 300ms;">
+<button onclick="scrollToSection('team')" class="ripple-btn reveal-up bg-on-background text-white px-8 py-4 rounded-full font-bold flex items-center justify-center md:justify-start gap-3 transition-all duration-500 hover:scale-[1.05] md:hover:scale-[1.08] hover:shadow-[0_15px_40px_rgba(15,23,42,0.4),inset_0_0_20px_rgba(255,255,255,0.3)] active:scale-95 group mt-4 mx-auto md:mx-0 w-full md:w-auto" style="transition-delay: 300ms;">
                     Meet Our Doctors
                     <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
 </button>
@@ -371,7 +447,7 @@
 </section>
 
 <!-- 5. WHY CHOOSE US -->
-<section class="py-16 md:py-section-gap bg-surface-container-low px-6 md:px-gutter mt-10 md:mt-0">
+<section id="pricing" class="py-16 md:py-section-gap bg-surface-container-low px-6 md:px-gutter mt-10 md:mt-0">
 <div class="max-w-container-max mx-auto">
 <div class="text-center mb-12 md:mb-16 space-y-4">
 <span class="reveal-up block text-primary font-bold tracking-widest text-label-md uppercase"># WHY US</span>
@@ -397,7 +473,7 @@
 <div class="p-8 md:p-12 md:w-1/2 space-y-6 text-center md:text-left">
 <h3 class="text-headline-sm md:text-headline-md text-on-background font-black leading-tight group-hover:text-primary transition-colors duration-300">Affordable &amp; Transparent Pricing</h3>
 <p class="text-body-md md:text-body-lg text-on-surface-variant leading-relaxed">We believe premium dental care should be accessible. No hidden fees, just clear plans tailored for you.</p>
-<a class="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-primary text-primary font-bold rounded-full hover:bg-primary hover:text-white transition-all duration-500 hover:scale-[1.05] md:hover:scale-[1.08] hover:shadow-[0_15px_30px_rgba(37,99,235,0.3),inset_0_0_20px_rgba(255,255,255,0.3)] active:scale-95 group/btn w-full md:w-auto" href="#">
+<a onclick="scrollToSection('pricing')" class="ripple-btn inline-flex items-center justify-center gap-2 px-8 py-4 border-2 cursor-pointer" border-primary text-primary font-bold rounded-full hover:bg-primary hover:text-white transition-all duration-500 hover:scale-[1.05] md:hover:scale-[1.08] hover:shadow-[0_15px_30px_rgba(37,99,235,0.3),inset_0_0_20px_rgba(255,255,255,0.3)] active:scale-95 group/btn w-full md:w-auto">
                         View Our Plans
                         <span class="material-symbols-outlined group-hover/btn:translate-x-2 transition-transform duration-500">arrow_forward</span>
 </a>
@@ -413,7 +489,7 @@
 </section>
 
 <!-- 6. SERVICES -->
-<section class="py-16 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto">
+<section id="services" class="py-16 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto">
 <div class="flex flex-col md:flex-row gap-12 md:gap-20 items-center">
 <div class="w-full md:w-1/2 space-y-6 md:space-y-8">
 <span class="reveal-up block text-primary font-bold tracking-widest text-label-md uppercase text-center md:text-left"># SERVICES</span>
@@ -465,28 +541,39 @@
 </section>
 
 <!-- 7. APPOINTMENT -->
-<section class="py-16 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto">
+<section id="appointment" class="py-16 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto">
 <div class="bg-inverse-surface text-white rounded-[2rem] md:rounded-[3rem] overflow-hidden flex flex-col md:flex-row reveal-up group hover:shadow-[0_40px_80px_rgba(15,23,42,0.5)] transition-all duration-700 hover:-translate-y-2 relative">
 <div class="absolute inset-0 bg-gradient-to-br from-primary/20 to-transparent pointer-events-none"></div>
 <div class="w-full md:w-1/2 p-8 md:p-20 relative z-10">
 <span class="reveal-up font-bold tracking-widest text-label-md uppercase text-primary-fixed-dim mb-4 block"># APPOINTMENT BOOKING</span>
 <h2 class="reveal-up text-headline-lg-mobile md:text-headline-lg mb-8 md:mb-10 text-white" style="transition-delay: 100ms;">Easy &amp; quick appointment</h2>
-<form class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 reveal-scale" style="transition-delay: 200ms;">
+<form id="appointment-form" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 reveal-scale" style="transition-delay: 200ms;">
 <div class="relative md:col-span-1">
-    <input class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm focus:shadow-[0_0_20px_rgba(37,99,235,0.3)]" id="fname" placeholder="Full name" type="text"/>
+    <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm" id="fname" placeholder="Full name" type="text"/>
     <label class="absolute left-6 top-4 text-white/50 text-xs md:text-sm font-medium transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-translate-y-2 peer-focus:scale-85 peer-focus:text-white" for="fname">Full Name</label>
 </div>
 <div class="relative md:col-span-1">
-    <input class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm focus:shadow-[0_0_20px_rgba(37,99,235,0.3)]" id="email" placeholder="Email" type="email"/>
+    <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm" id="email" placeholder="Email" type="email"/>
     <label class="absolute left-6 top-4 text-white/50 text-xs md:text-sm font-medium transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-translate-y-2 peer-focus:scale-85 peer-focus:text-white" for="email">Email Address</label>
 </div>
-<input class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm focus:shadow-[0_0_20px_rgba(37,99,235,0.3)]" type="date"/>
-<input class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm focus:shadow-[0_0_20px_rgba(37,99,235,0.3)]" type="time"/>
+<div class="relative md:col-span-2">
+    <select id="service-select" required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm appearance-none">
+        <option value="" disabled selected class="text-black">Select a Service</option>
+        <option value="Teeth Cleaning" class="text-black">Teeth Cleaning</option>
+        <option value="Teeth Whitening" class="text-black">Teeth Whitening</option>
+        <option value="Orthodontics" class="text-black">Orthodontics</option>
+        <option value="Dental Implants" class="text-black">Dental Implants</option>
+        <option value="Emergency Care" class="text-black">Emergency Care</option>
+        <option value="General Consultation" class="text-black">General Consultation</option>
+    </select>
+</div>
+<input required class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm" type="date"/>
+<input required class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm" type="time"/>
 <div class="relative col-span-1 md:col-span-2">
-    <input class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm focus:shadow-[0_0_20px_rgba(37,99,235,0.3)]" id="phone" placeholder="Phone" type="tel"/>
+    <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm" id="phone" placeholder="Phone" type="tel"/>
     <label class="absolute left-6 top-4 text-white/50 text-xs md:text-sm font-medium transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-translate-y-2 peer-focus:scale-85 peer-focus:text-white" for="phone">Phone Number</label>
 </div>
-<button class="col-span-1 md:col-span-2 bg-primary text-white py-4 md:py-5 rounded-full font-bold text-lg hover:shadow-[0_15px_40px_rgba(37,99,235,0.6),inset_0_0_20px_rgba(255,255,255,0.3)] hover:scale-[1.03] md:hover:scale-[1.05] active:scale-95 transition-all duration-500 mt-2 md:mt-4 border border-white/10 group">
+<button type="submit" class="ripple-btn col-span-1 md:col-span-2 bg-primary text-white py-4 md:py-5 rounded-full font-bold text-lg hover:shadow-[0_15px_40px_rgba(37,99,235,0.6),inset_0_0_20px_rgba(255,255,255,0.3)] hover:scale-[1.03] md:hover:scale-[1.05] active:scale-95 transition-all duration-500 mt-2 md:mt-4 border border-white/10 group">
     Reserve Your Spot <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
 </button>
 </form>
@@ -513,14 +600,14 @@
 <cite class="not-italic block mt-6 md:mt-8 text-primary font-bold tracking-widest uppercase text-label-md">Sarah M. &nbsp;•&nbsp; Verified Patient</cite>
 </blockquote>
 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 max-w-4xl mx-auto pt-8 md:pt-12">
-<div class="reveal-up ambient-card bg-white p-6 md:p-8 rounded-[2rem] flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:gap-6 transition-all duration-700 hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02] md:hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(37,99,235,0.1)] border border-outline-variant/20 group cursor-pointer" style="transition-delay: 200ms;">
+<div onclick="expandTestimonial(this)" class="ripple-btn reveal-up ambient-card bg-white p-6 md:p-8 rounded-[2rem] flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:gap-6 transition-all duration-700 hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02] md:hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(37,99,235,0.1)] border border-outline-variant/20 group cursor-pointer" style="transition-delay: 200ms;">
 <img alt="Cooper" class="w-16 h-16 rounded-full transition-all duration-500 group-hover:scale-110 shadow-md group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEX6xc2q6hLkBx8Te3CbYjzTq1Oao19yDwOWcUJ4tj6b_oY54oieDhBMcP24nDSkgz6g3sGtFiKnIsKpgPajs8YHudVpE-TNnnxNKcYt-OYis_B7vweI3NVMqYS8rS9hHMkhqb1SVYZeI8mSZKniO8kWABKGGxLVfhceYmJvBV_pmnxPI9mKGYoXvIa9Mh4NmuCLr6XsOFwR-UKoZXBo3YHaDhbAxL1MZSIKMNPnMZ6nVyJv3Kw1-Im0sr9-a6OzWGWqBraVlBgACv"/>
 <div>
 <p class="text-body-md text-on-surface-variant italic mb-3 md:mb-4 leading-relaxed group-hover:text-on-background transition-colors">"Very thorough examination and excellent follow-up care. Best in the city without a doubt."</p>
 <span class="font-bold text-on-background group-hover:text-primary transition-colors">Cooper J.</span>
 </div>
 </div>
-<div class="reveal-up ambient-card bg-white p-6 md:p-8 rounded-[2rem] flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:gap-6 transition-all duration-700 hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02] md:hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(37,99,235,0.1)] border border-outline-variant/20 group cursor-pointer" style="transition-delay: 300ms;">
+<div onclick="expandTestimonial(this)" class="ripple-btn reveal-up ambient-card bg-white p-6 md:p-8 rounded-[2rem] flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-4 md:gap-6 transition-all duration-700 hover:-translate-y-2 md:hover:-translate-y-3 hover:scale-[1.02] md:hover:scale-[1.03] hover:shadow-[0_30px_60px_rgba(37,99,235,0.1)] border border-outline-variant/20 group cursor-pointer" style="transition-delay: 300ms;">
 <img alt="Kristin" class="w-16 h-16 rounded-full transition-all duration-500 group-hover:scale-110 shadow-md group-hover:shadow-[0_0_20px_rgba(37,99,235,0.4)]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkkV0sO4r-fXDjvGUqLdJSCTD2CuFUus4YMuMpRfWoYoZPN_V8K43NyPUUSEHzhsQ9JqPuZbosvpOPE6N03v8WHP6dlfFU0P4v44kgDyzU0s5i4wqSpd71ELEzyfQsYc_VkUScRLXW3ETLpvTjnLyEVwCrK6nl6EarBB4AjMDQOWZtf3Q5AvUe5Oxp4lUyacMPuq2aM-PDEWHcH6twLPt_xmnQD4zRGCiqyFz6SHi4dYnmBcDdl10uJ8aQl4kRO6Y2Te6OG4HF2Ga0"/>
 <div>
 <p class="text-body-md text-on-surface-variant italic mb-3 md:mb-4 leading-relaxed group-hover:text-on-background transition-colors">"Professional, clean, and modern. My kids actually enjoy going to the dentist now!"</p>
@@ -532,13 +619,13 @@
 </section>
 
 <!-- 9. TEAM -->
-<section class="py-16 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto">
+<section id="team" class="py-16 md:py-section-gap px-6 md:px-gutter max-w-container-max mx-auto">
 <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-12 md:mb-16 gap-6 md:gap-8 text-center md:text-left">
 <div class="space-y-4">
 <span class="reveal-up block text-primary font-bold tracking-widest text-label-md uppercase"># OUR TEAM</span>
 <h2 class="reveal-up text-headline-lg-mobile md:text-headline-lg text-on-background" style="transition-delay: 100ms;">Your trusted dental professionals</h2>
 </div>
-<button class="reveal-up bg-white text-on-background border-2 border-primary px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all hover:bg-primary hover:text-white hover:scale-[1.05] md:hover:scale-[1.08] hover:shadow-[0_15px_30px_rgba(37,99,235,0.3),inset_0_0_20px_rgba(255,255,255,0.3)] group active:scale-95 duration-500 w-full md:w-auto" style="transition-delay: 200ms;">
+<button onclick="scrollToSection('team')" class="ripple-btn reveal-up bg-white text-on-background border-2 border-primary px-8 py-4 rounded-full font-bold flex items-center justify-center gap-3 transition-all hover:bg-primary hover:text-white hover:scale-[1.05] md:hover:scale-[1.08] hover:shadow-[0_15px_30px_rgba(37,99,235,0.3),inset_0_0_20px_rgba(255,255,255,0.3)] group active:scale-95 duration-500 w-full md:w-auto" style="transition-delay: 200ms;">
                     See All Doctors
                     <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform duration-500">arrow_forward</span>
 </button>
@@ -588,7 +675,7 @@
 </section>
 
 <!-- 10. BLOG -->
-<section class="py-16 md:py-section-gap px-6 md:px-gutter bg-surface-container-low border-t border-outline-variant/10">
+<section id="blog" class="py-16 md:py-section-gap px-6 md:px-gutter bg-surface-container-low border-t border-outline-variant/10">
 <div class="max-w-container-max mx-auto">
 <div class="mb-12 md:mb-16 text-center space-y-4">
 <span class="reveal-up block text-primary font-bold tracking-widest text-label-md uppercase"># INSIGHTS</span>
@@ -603,7 +690,7 @@
 <div class="p-8 md:p-10 flex-grow flex flex-col">
 <h3 class="text-headline-sm font-bold text-on-background mb-3 md:mb-4 group-hover:text-primary transition-colors cursor-pointer leading-tight">5 Tips for Maintaining Your Brightest Smile at Home</h3>
 <p class="text-body-md md:text-body-lg text-on-surface-variant mb-6 md:mb-8 leading-relaxed flex-grow">Discover the simple daily habits that can significantly improve your oral health and keep your teeth white between visits.</p>
-<a class="font-bold text-primary flex items-center gap-2 w-fit text-base md:text-lg" href="#">Read Article <span class="material-symbols-outlined group-hover:translate-x-3 transition-transform duration-500">trending_flat</span></a>
+<a onclick="scrollToSection(\'blog\')" class="font-bold text-primary flex items-center gap-2 w-fit text-base md:text-lg cursor-pointer">Read Article <span class="material-symbols-outlined group-hover:translate-x-3 transition-transform duration-500">trending_flat</span></a>
 </div>
 </article>
 <article class="reveal-up bg-white rounded-[2.5rem] overflow-hidden group ambient-card transition-all duration-700 md:hover:-translate-y-[18px] hover:-translate-y-2 hover:scale-[1.02] md:hover:scale-[1.03] hover:shadow-[0_40px_80px_rgba(15,23,42,0.15)] border border-outline-variant/20 flex flex-col" style="transition-delay: 200ms;">
@@ -614,7 +701,7 @@
 <div class="p-8 md:p-10 flex-grow flex flex-col">
 <h3 class="text-headline-sm font-bold text-on-background mb-3 md:mb-4 group-hover:text-primary transition-colors cursor-pointer leading-tight">How to Choose the Right Dentist for Your Family</h3>
 <p class="text-body-md md:text-body-lg text-on-surface-variant mb-6 md:mb-8 leading-relaxed flex-grow">What you should look for when selecting a dental clinic that meets the needs of children, adults, and seniors alike.</p>
-<a class="font-bold text-primary flex items-center gap-2 w-fit text-base md:text-lg" href="#">Read Article <span class="material-symbols-outlined group-hover:translate-x-3 transition-transform duration-500">trending_flat</span></a>
+<a onclick="scrollToSection(\'blog\')" class="font-bold text-primary flex items-center gap-2 w-fit text-base md:text-lg cursor-pointer">Read Article <span class="material-symbols-outlined group-hover:translate-x-3 transition-transform duration-500">trending_flat</span></a>
 </div>
 </article>
 </div>
@@ -624,7 +711,7 @@
 </main>
 
 <!-- 11. FOOTER -->
-<footer class="bg-inverse-surface text-white w-full">
+<footer id="contacts" class="bg-inverse-surface text-white w-full">
 <div class="max-w-container-max mx-auto px-6 md:px-gutter py-16 md:py-24 flex flex-col gap-12 md:gap-16">
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 md:gap-12 items-start text-center sm:text-left">
 <div class="space-y-6 md:space-y-8 flex flex-col items-center sm:items-start">
@@ -769,6 +856,188 @@
         }, observerOptions);
         countElements.forEach(el => countObserver.observe(el));
     });
+</script>
+
+
+<!-- Overlay for Testimonial -->
+<div class="testimonial-overlay" id="testimonial-overlay" onclick="closeTestimonial()"></div>
+
+<!-- Doctor Modal -->
+<div class="modal-overlay" id="doctor-modal" onclick="closeDoctorModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="absolute top-4 right-4 text-on-surface-variant hover:text-primary" onclick="closeDoctorModal(event)">
+            <span class="material-symbols-outlined">close</span>
+        </button>
+        <div class="w-24 h-24 bg-primary/10 rounded-full mx-auto mb-4 flex items-center justify-center">
+            <span class="material-symbols-outlined text-4xl text-primary">stethoscope</span>
+        </div>
+        <h3 id="doctor-name" class="text-2xl font-bold text-on-background mb-2">Doctor Name</h3>
+        <p class="text-primary font-bold mb-4">Senior Specialist</p>
+        <p class="text-on-surface-variant mb-6 text-body-md leading-relaxed">With over 15 years of experience in advanced dentistry, our doctors are dedicated to providing the highest quality of care using state-of-the-art technology and evidence-based practices.</p>
+        <button onclick="bookService('General Consultation'); closeDoctorModal(event);" class="ripple-btn w-full bg-primary text-white py-3 rounded-full font-bold hover:shadow-[0_10px_20px_rgba(37,99,235,0.4)] transition-all">Book Appointment</button>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="modal-overlay" id="success-modal" onclick="closeSuccessModal(event)">
+    <div class="modal-content" onclick="event.stopPropagation()">
+        <div class="success-checkmark">
+            <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 130.2 130.2">
+                <circle class="path circle" fill="none" stroke="#4ade80" stroke-width="6" stroke-miterlimit="10" cx="65.1" cy="65.1" r="62.1"/>
+                <path class="path check" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" d="M100.2 40.2L51.5 88.8 29.8 67.5"/>
+            </svg>
+        </div>
+        <h3 class="text-3xl font-bold text-on-background mb-2 mt-4">Thank You!</h3>
+        <p class="text-on-surface-variant text-body-lg mb-6">Appointment Request Received!</p>
+        <button onclick="closeSuccessModal(event)" class="ripple-btn w-full bg-surface-container-low text-on-background py-3 rounded-full font-bold hover:bg-outline-variant/30 transition-all">Close</button>
+    </div>
+</div>
+
+<script>
+    // Ripple Effect
+    document.addEventListener('click', function(e) {
+        const target = e.target.closest('.ripple-btn');
+        if (!target) return;
+        
+        const circle = document.createElement('span');
+        const diameter = Math.max(target.clientWidth, target.clientHeight);
+        const radius = diameter / 2;
+        
+        const rect = target.getBoundingClientRect();
+        circle.style.width = circle.style.height = `${diameter}px`;
+        circle.style.left = `${e.clientX - rect.left - radius}px`;
+        circle.style.top = `${e.clientY - rect.top - radius}px`;
+        circle.classList.add('ripple');
+        
+        const existingRipple = target.querySelector('.ripple');
+        if (existingRipple) {
+            existingRipple.remove();
+        }
+        
+        target.appendChild(circle);
+        setTimeout(() => circle.remove(), 600);
+    });
+
+    // Smooth Scroll
+    function scrollToSection(id) {
+        const section = document.getElementById(id);
+        if (section) {
+            const yOffset = -80; // navbar height
+            const y = section.getBoundingClientRect().top + window.scrollY + yOffset;
+            window.scrollTo({top: y, behavior: 'smooth'});
+        }
+    }
+
+    // Mobile Menu Close
+    function closeMobileMenu() {
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileBtn = document.getElementById('mobile-menu-btn');
+        if(mobileMenu && mobileMenu.classList.contains('menu-open')) {
+            mobileMenu.classList.remove('menu-open');
+            if(mobileBtn) mobileBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">menu</span>';
+        }
+    }
+
+    // Scrollspy for Navbar
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section, footer');
+        const navLinks = document.querySelectorAll('.hidden.md\\:flex .nav-link');
+        
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            if (window.scrollY >= sectionTop - 150) {
+                current = section.getAttribute('id');
+            }
+        });
+        
+        navLinks.forEach(link => {
+            link.classList.remove('nav-active');
+            if (link.getAttribute('data-target') === current) {
+                link.classList.add('nav-active');
+            }
+        });
+    });
+
+    // Services -> Book
+    function bookService(serviceName) {
+        const select = document.getElementById('service-select');
+        if(select) {
+            select.value = serviceName;
+        }
+        scrollToSection('appointment');
+    }
+
+    // Doctor Modal
+    function openDoctorModal(name) {
+        document.getElementById('doctor-name').innerText = name;
+        document.getElementById('doctor-modal').classList.add('active');
+    }
+    function closeDoctorModal(e) {
+        document.getElementById('doctor-modal').classList.remove('active');
+    }
+
+    // Success Modal & Confetti
+    const form = document.getElementById('appointment-form');
+    if(form) {
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            document.getElementById('success-modal').classList.add('active');
+            fireConfetti();
+            form.reset();
+            setTimeout(() => {
+                closeSuccessModal();
+            }, 3000);
+        });
+    }
+
+    function closeSuccessModal(e) {
+        document.getElementById('success-modal').classList.remove('active');
+    }
+
+    function fireConfetti() {
+        const colors = ['#2563eb', '#4ade80', '#fbbf24', '#f87171'];
+        for(let i=0; i<50; i++) {
+            const confetti = document.createElement('div');
+            confetti.classList.add('confetti');
+            confetti.style.left = Math.random() * 100 + 'vw';
+            confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+            confetti.style.animation = `fall ${Math.random() * 2 + 1}s linear forwards`;
+            document.body.appendChild(confetti);
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    }
+
+    // Testimonial Expand
+    let activeTestimonial = null;
+    function expandTestimonial(el) {
+        if(activeTestimonial === el) {
+            closeTestimonial();
+            return;
+        }
+        closeTestimonial();
+        activeTestimonial = el;
+        el.classList.add('testimonial-expanded');
+        document.getElementById('testimonial-overlay').classList.add('active');
+    }
+    function closeTestimonial() {
+        if(activeTestimonial) {
+            activeTestimonial.classList.remove('testimonial-expanded');
+            activeTestimonial = null;
+        }
+        document.getElementById('testimonial-overlay').classList.remove('active');
+    }
+
+    // Add CSS for confetti fall
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+    `;
+    document.head.appendChild(style);
+
 </script>
 
 </body>
