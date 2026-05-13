@@ -201,17 +201,6 @@
         text-shadow: 0 0 12px rgba(37, 99, 235, 0.8);
     }
 
-    /* Mobile Menu Transition */
-    #mobile-menu {
-        transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        transform: translateY(-20px);
-    }
-    .menu-open {
-        opacity: 1 !important;
-        transform: translateY(0) !important;
-        pointer-events: auto !important;
-    }
-
     /* Interactive Styles */
     .nav-active {
         color: #2563eb !important;
@@ -322,16 +311,28 @@
 </nav>
 
 <!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-inverse-surface z-40 opacity-0 pointer-events-none flex flex-col p-6 pt-24 shadow-xl transition-all duration-300 ease-in-out md:hidden items-center justify-start overflow-y-auto w-full h-full">
-    <div class="w-full flex flex-col items-center max-w-sm mt-4 space-y-2 pb-10">
-        <a class="py-4 text-headline-sm font-bold text-on-background hover:text-primary transition-colors cursor-pointer w-full text-center rounded-xl hover:bg-surface-container-low" onclick="scrollToSection('home'); closeMobileMenu()">Home</a>
-        <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-full text-center border-t border-outline-variant/10 rounded-xl hover:bg-surface-container-low" onclick="scrollToSection('about'); closeMobileMenu()">About</a>
-        <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-full text-center border-t border-outline-variant/10 rounded-xl hover:bg-surface-container-low" onclick="scrollToSection('services'); closeMobileMenu()">Services</a>
-        <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-full text-center border-t border-outline-variant/10 rounded-xl hover:bg-surface-container-low" onclick="scrollToSection('team'); closeMobileMenu()">Team</a>
-        <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors cursor-pointer w-full text-center border-t border-outline-variant/10 rounded-xl hover:bg-surface-container-low" onclick="scrollToSection('contacts'); closeMobileMenu()">Contact</a>
-        <div class="pt-6 w-full">
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-inverse-surface/60 backdrop-blur-sm z-[55] opacity-0 pointer-events-none transition-opacity duration-300 ease-in-out md:hidden" onclick="closeMobileMenu()"></div>
+
+<!-- Mobile Menu Drawer -->
+<div id="mobile-menu" class="fixed top-0 right-0 h-full w-[85vw] max-w-sm bg-inverse-surface text-white z-[60] transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col p-8 pt-10 shadow-2xl md:hidden overflow-y-auto">
+    <div class="flex justify-between items-center mb-10 border-b border-white/10 pb-6">
+        <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary-fixed-dim text-3xl" style="font-variation-settings: 'FILL' 1;">star</span>
+            <span class="font-display text-xl font-black text-white">Dental<span class="text-primary-fixed-dim">Care</span></span>
+        </div>
+        <button onclick="closeMobileMenu()" class="text-white p-2 rounded-full hover:bg-white/10 transition-colors">
+            <span class="material-symbols-outlined text-3xl">close</span>
+        </button>
+    </div>
+    <div class="flex flex-col gap-6 h-full">
+        <a class="text-headline-sm font-bold text-white hover:text-primary transition-colors cursor-pointer w-full text-left" onclick="scrollToSection('home'); closeMobileMenu()">Home</a>
+        <a class="text-headline-sm font-medium text-outline-variant hover:text-white transition-colors cursor-pointer w-full text-left" onclick="scrollToSection('about'); closeMobileMenu()">About</a>
+        <a class="text-headline-sm font-medium text-outline-variant hover:text-white transition-colors cursor-pointer w-full text-left" onclick="scrollToSection('services'); closeMobileMenu()">Services</a>
+        <a class="text-headline-sm font-medium text-outline-variant hover:text-white transition-colors cursor-pointer w-full text-left" onclick="scrollToSection('team'); closeMobileMenu()">Team</a>
+        <a class="text-headline-sm font-medium text-outline-variant hover:text-white transition-colors cursor-pointer w-full text-left" onclick="scrollToSection('contacts'); closeMobileMenu()">Contact</a>
+        <div class="mt-auto pt-8 border-t border-white/10">
             <button onclick="scrollToSection('appointment'); closeMobileMenu();" class="ripple-btn bg-primary text-white w-full py-4 rounded-full font-bold flex items-center justify-center gap-2 shadow-lg hover:scale-105 active:scale-95 transition-all duration-300">
-                Book Appointment <span class="material-symbols-outlined text-sm">arrow_forward</span>
+                Let's Talk <span class="material-symbols-outlined text-sm">arrow_forward</span>
             </button>
         </div>
     </div>
@@ -769,18 +770,15 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // Mobile Menu Toggle
-                const mobileBtn = document.getElementById('mobile-menu-btn');
+                        const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        if(mobileBtn && mobileMenu) {
+        const mobileOverlay = document.getElementById('mobile-menu-overlay');
+        if(mobileBtn && mobileMenu && mobileOverlay) {
             mobileBtn.addEventListener('click', () => {
-                const isOpen = mobileMenu.classList.contains('menu-open');
-                if(!isOpen) {
-                    mobileMenu.classList.add('menu-open');
-                    mobileBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">close</span>';
-                } else {
-                    mobileMenu.classList.remove('menu-open');
-                    mobileBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">menu</span>';
-                }
+                mobileMenu.classList.remove('translate-x-full');
+                mobileMenu.classList.add('translate-x-0');
+                mobileOverlay.classList.remove('opacity-0', 'pointer-events-none');
+                mobileOverlay.classList.add('opacity-100', 'pointer-events-auto');
             });
         }
 
@@ -936,13 +934,17 @@
         }
     }
 
-    // Mobile Menu Close
+        // Mobile Menu Close
     function closeMobileMenu() {
         const mobileMenu = document.getElementById('mobile-menu');
-        const mobileBtn = document.getElementById('mobile-menu-btn');
-        if(mobileMenu && mobileMenu.classList.contains('menu-open')) {
-            mobileMenu.classList.remove('menu-open');
-            if(mobileBtn) mobileBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">menu</span>';
+        const mobileOverlay = document.getElementById('mobile-menu-overlay');
+        if(mobileMenu) {
+            mobileMenu.classList.add('translate-x-full');
+            mobileMenu.classList.remove('translate-x-0');
+        }
+        if(mobileOverlay) {
+            mobileOverlay.classList.add('opacity-0', 'pointer-events-none');
+            mobileOverlay.classList.remove('opacity-100', 'pointer-events-auto');
         }
     }
 
