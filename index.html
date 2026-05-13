@@ -201,6 +201,16 @@
         text-shadow: 0 0 12px rgba(37, 99, 235, 0.8);
     }
 
+    /* Fix Browser Autofill styles for dark theme inputs */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus, 
+    input:-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s !important;
+        -webkit-text-fill-color: #ffffff !important;
+        caret-color: #ffffff !important;
+    }
+
     /* Interactive Styles */
     .nav-active {
         color: #2563eb !important;
