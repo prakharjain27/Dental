@@ -1027,14 +1027,15 @@
             const time = document.getElementById('time').value;
             const service = document.getElementById('service-select').value;
             
-            const msgText = `🦷 New Appointment Request - Dental Care Clinic\n\n👤 Name: ${name}\n✉️ Email: ${email}\n🦷 Service: ${service}\n📅 Date: ${date}\n⏰ Time: ${time}\n📱 Phone: ${phone}\n\nPlease confirm my appointment. Thank you!`;
+            const msgText = `🦷 *New Appointment Request - Dental Care Clinic*\n\n👤 *Name:* ${name}\n✉️ *Email:* ${email}\n🦷 *Service:* ${service}\n📅 *Date:* ${date}\n⏰ *Time:* ${time}\n📱 *Phone:* ${phone}\n\n_Please confirm my appointment. Thank you!_`;
             const whatsappMsg = encodeURIComponent(msgText);
             
             document.getElementById('success-modal').classList.add('active');
             fireConfetti();
             
             setTimeout(() => {
-                window.open(`https://wa.me/917014969794?text=${whatsappMsg}`, '_blank');
+                const whatsappUrl = `https://api.whatsapp.com/send?phone=917014969794&text=${whatsappMsg}`;
+                window.location.href = whatsappUrl;
                 closeSuccessModal();
                 form.reset();
             }, 2500);
