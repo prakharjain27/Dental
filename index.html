@@ -203,11 +203,11 @@
 
     /* Mobile Menu Transition */
     #mobile-menu {
-        transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        transition: opacity 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .menu-open {
         opacity: 1 !important;
-        transform: translateY(0) !important;
+        transform: translateX(0) !important;
         pointer-events: auto !important;
     }
 
@@ -321,13 +321,13 @@
 </nav>
 
 <!-- Mobile Menu Overlay -->
-<div id="mobile-menu" class="fixed inset-0 top-20 bg-white dark:bg-inverse-surface z-10 opacity-0 -translate-y-4 pointer-events-none flex flex-col p-6 shadow-xl border-t border-outline-variant/20 md:hidden">
-    <a class="py-4 text-headline-sm font-bold text-primary border-b border-outline-variant/10 nav-link" onclick="scrollToSection('home'); closeMobileMenu()" data-target="home">Home</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10 nav-link" onclick="scrollToSection('about'); closeMobileMenu()" data-target="about">About</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10 nav-link" onclick="scrollToSection('services'); closeMobileMenu()" data-target="services">Services</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10 nav-link" onclick="scrollToSection('team'); closeMobileMenu()" data-target="team">Team</a>
-    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary border-b border-outline-variant/10 nav-link" onclick="scrollToSection('contacts'); closeMobileMenu()" data-target="contacts">Contact</a>
-    <button class="mt-8 bg-primary text-white py-4 rounded-full font-bold text-lg w-full flex justify-center items-center gap-2 hover:shadow-lg active:scale-95 transition-all">
+<div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-inverse-surface z-40 opacity-0 translate-x-full pointer-events-none flex flex-col p-8 pt-24 shadow-xl transition-all duration-500 ease-in-out md:hidden items-center justify-center">
+    <a class="py-4 text-headline-sm font-bold text-on-background hover:text-primary transition-colors nav-link" onclick="scrollToSection('home'); closeMobileMenu()" data-target="home">Home</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors nav-link" onclick="scrollToSection('about'); closeMobileMenu()" data-target="about">About</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors nav-link" onclick="scrollToSection('services'); closeMobileMenu()" data-target="services">Services</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors nav-link" onclick="scrollToSection('team'); closeMobileMenu()" data-target="team">Team</a>
+    <a class="py-4 text-headline-sm font-medium text-on-surface-variant hover:text-primary transition-colors nav-link" onclick="scrollToSection('contacts'); closeMobileMenu()" data-target="contacts">Contact</a>
+    <button onclick="scrollToSection('appointment'); closeMobileMenu();" class="ripple-btn mt-8 bg-primary text-white w-full max-w-xs py-4 rounded-full font-bold flex items-center justify-center gap-2">
         Let's Talk <span class="material-symbols-outlined text-sm">arrow_forward</span>
     </button>
 </div>
@@ -567,8 +567,8 @@
         <option value="General Consultation" class="text-black">General Consultation</option>
     </select>
 </div>
-<input required class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm" type="date"/>
-<input required class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm" type="time"/>
+<input id="date" required class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm" type="date"/>
+<input id="time" required class="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 py-4 text-white/70 focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 shadow-sm" type="time"/>
 <div class="relative col-span-1 md:col-span-2">
     <input required class="w-full bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl px-6 pt-6 pb-2 text-white placeholder-transparent focus:outline-none focus:ring-4 focus:ring-primary/60 focus:border-primary focus:-translate-y-1 focus:bg-white/10 transition-all duration-300 floating-input peer shadow-sm" id="phone" placeholder="Phone" type="tel"/>
     <label class="absolute left-6 top-4 text-white/50 text-xs md:text-sm font-medium transition-all duration-300 pointer-events-none peer-placeholder-shown:top-4 peer-placeholder-shown:text-base peer-focus:-translate-y-2 peer-focus:scale-85 peer-focus:text-white" for="phone">Phone Number</label>
@@ -719,16 +719,17 @@
 <div class="space-y-6 md:space-y-8 flex flex-col items-center sm:items-start">
 <div class="flex items-center gap-2">
 <span class="material-symbols-outlined text-primary-fixed-dim text-4xl" style="font-variation-settings: 'FILL' 1;">star</span>
-<span class="font-display text-headline-sm font-black text-white">Apex<span class="text-primary-fixed-dim">Care</span></span>
+<span class="font-display text-headline-sm font-black text-white">Dental<span class="text-primary-fixed-dim">Care</span></span>
 </div>
 <p class="text-outline-variant text-base md:text-body-lg leading-relaxed">Providing precision dental care with empathy since 1995. Your smile is our signature.</p>
 <div class="space-y-2 mt-4">
 <p class="text-outline-variant text-base md:text-body-lg leading-relaxed">
-    <strong>ApexCare Dental Clinic</strong><br/>
+    <strong>Dental Care Clinic</strong><br/>
     Near Medical College,<br/>
     Jodhpur, Rajasthan 342001
 </p>
-<p class="text-primary-fixed-dim hover:text-white font-bold transition-colors cursor-pointer w-fit link-underline text-base md:text-lg">hello@apexcare.com</p>
+<a href="tel:+917014969794" class="block text-primary-fixed-dim hover:text-white font-bold transition-colors w-fit link-underline text-base md:text-lg mt-2">+91 70149 69794</a>
+<a href="mailto:hello@dentalcare.in" class="block text-primary-fixed-dim hover:text-white font-bold transition-colors w-fit link-underline text-base md:text-lg">hello@dentalcare.in</a>
 </div>
 </div>
 
@@ -738,7 +739,7 @@
 <div class="w-full h-48 md:h-56 rounded-2xl overflow-hidden border-2 border-white/10 shadow-lg relative bg-surface-container-low">
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114312.33649557451!2d72.9367362!3d26.2703817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39418c4eaa06cb69%3A0x8114ea5b0eea1abc!2sJodhpur%2C%20Rajasthan!5e0!3m2!1sen!2sin!4v1714000000000!5m2!1sen!2sin" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 </div>
-<a href="https://maps.google.com/?q=ApexCare+Dental+Clinic,+Near+Medical+College,+Jodhpur,+Rajasthan+342001" target="_blank" class="ripple-btn bg-primary text-white px-6 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white hover:text-primary transition-all duration-300 hover:scale-[1.05] shadow-lg w-full md:w-auto mt-2">
+<a href="https://maps.google.com/?q=Dental Care+Dental+Clinic,+Near+Medical+College,+Jodhpur,+Rajasthan+342001" target="_blank" class="ripple-btn bg-primary text-white px-6 py-3 rounded-full font-bold flex items-center justify-center gap-2 hover:bg-white hover:text-primary transition-all duration-300 hover:scale-[1.05] shadow-lg w-full md:w-auto mt-2">
     Get Directions <span class="material-symbols-outlined text-sm">open_in_new</span>
 </a>
 </div>
@@ -763,14 +764,12 @@
 <script>
     document.addEventListener("DOMContentLoaded", () => {
         // Mobile Menu Toggle
-        const mobileBtn = document.getElementById('mobile-menu-btn');
+                const mobileBtn = document.getElementById('mobile-menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
-        let isMenuOpen = false;
-
         if(mobileBtn && mobileMenu) {
             mobileBtn.addEventListener('click', () => {
-                isMenuOpen = !isMenuOpen;
-                if(isMenuOpen) {
+                const isOpen = mobileMenu.classList.contains('menu-open');
+                if(!isOpen) {
                     mobileMenu.classList.add('menu-open');
                     mobileBtn.innerHTML = '<span class="material-symbols-outlined text-3xl">close</span>';
                 } else {
@@ -891,8 +890,8 @@
                 <path class="path check" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" d="M100.2 40.2L51.5 88.8 29.8 67.5"/>
             </svg>
         </div>
-        <h3 class="text-3xl font-bold text-on-background mb-2 mt-4">Thank You!</h3>
-        <p class="text-on-surface-variant text-body-lg mb-6">Appointment Request Received!</p>
+        <h3 class="text-3xl font-bold text-on-background mb-2 mt-4">Request Sent!</h3>
+        <p class="text-on-surface-variant text-body-lg mb-6">Redirecting to WhatsApp...</p>
         <button onclick="closeSuccessModal(event)" class="ripple-btn w-full bg-surface-container-low text-on-background py-3 rounded-full font-bold hover:bg-outline-variant/30 transition-all">Close</button>
     </div>
 </div>
@@ -982,16 +981,30 @@
     }
 
     // Success Modal & Confetti
-    const form = document.getElementById('appointment-form');
+        const form = document.getElementById('appointment-form');
     if(form) {
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+            
+            const name = document.getElementById('fname').value;
+            const phone = document.getElementById('phone').value;
+            const email = document.getElementById('email').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const service = document.getElementById('service-select').value;
+            const msgEl = document.getElementById('message');
+            const message = msgEl ? msgEl.value : '';
+            
+            const whatsappMsg = `New Appointment Request from Dental Care Website%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0APreferred Date: ${date} at ${time}%0AService: ${service}%0AMessage: ${message}%0A%0APlease confirm the appointment.`;
+            
             document.getElementById('success-modal').classList.add('active');
             fireConfetti();
-            form.reset();
+            
             setTimeout(() => {
+                window.open(`https://wa.me/917014969794?text=${whatsappMsg}`, '_blank');
                 closeSuccessModal();
-            }, 3000);
+                form.reset();
+            }, 2000);
         });
     }
 
