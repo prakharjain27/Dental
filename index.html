@@ -908,8 +908,8 @@
                 <path class="path check" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-miterlimit="10" d="M100.2 40.2L51.5 88.8 29.8 67.5"/>
             </svg>
         </div>
-        <h3 class="text-3xl font-bold text-on-background mb-2 mt-4">Request Sent!</h3>
-        <p class="text-on-surface-variant text-body-lg mb-6">Redirecting to WhatsApp...</p>
+        <h3 class="text-2xl font-bold text-on-background mb-2 mt-4">Opening WhatsApp...</h3>
+        <p class="text-on-surface-variant text-body-lg mb-6">Your appointment request has been sent!</p>
         <button onclick="closeSuccessModal(event)" class="ripple-btn w-full bg-surface-container-low text-on-background py-3 rounded-full font-bold hover:bg-outline-variant/30 transition-all">Close</button>
     </div>
 </div>
@@ -1015,7 +1015,8 @@
             const time = document.getElementById('time').value;
             const service = document.getElementById('service-select').value;
             
-            const whatsappMsg = `New Appointment Request%0A%0AName: ${name}%0APhone: ${phone}%0AEmail: ${email}%0APreferred Date: ${date} at ${time}%0AService: ${service}%0A%0APlease confirm the appointment.`;
+            const msgText = `🦷 New Appointment Request - ApexCare Dental Clinic\n\n👤 Name: ${name}\n✉️ Email: ${email}\n🦷 Service: ${service}\n📅 Date: ${date}\n⏰ Time: ${time}\n📱 Phone: ${phone}\n\nPlease confirm my appointment. Thank you!`;
+            const whatsappMsg = encodeURIComponent(msgText);
             
             document.getElementById('success-modal').classList.add('active');
             fireConfetti();
@@ -1024,7 +1025,7 @@
                 window.open(`https://wa.me/917014969794?text=${whatsappMsg}`, '_blank');
                 closeSuccessModal();
                 form.reset();
-            }, 2000);
+            }, 2500);
         });
     }
 
